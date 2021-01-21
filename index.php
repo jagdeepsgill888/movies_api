@@ -1,3 +1,12 @@
+<?php
+require_once './config/database.php';
+require_once './admin/scripts/read.php';
+
+
+  $getMovies = getAllMovies();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,16 +28,22 @@
     </ul>
     </header>
 
+ <?php foreach ($getMovies as $movies):?>
     <div class="movie-item">
-    <img src="images/gravity.jpg" alt="gravity cover Image">
-    <h2>Gravity</h2>
-    <h4>Movie Released: 2013</h4>
+    <img src="images/<?php echo $movies['movies_cover']; ?>" alt="<?php echo $movies['movies_title']; ?> cover Image">
+
+    <h2><?php echo $movies['movies_title']; ?></h2>
+
+    <h4>Movie Released: <?php echo $movies['movies_release']; ?></h4>
+    <p><?php echo $movies['movies_storyline']; ?></p>
     <a href="#">More details...</a>
     </div>
+    <?php endforeach;?>
 
-
+    
 <footer>
-<p>Copyright &#xA9; 2021</p>
+<p>Copyright &#xA9; <?php echo date('Y');?>
+</p>
 </footer>
 
 </body>
