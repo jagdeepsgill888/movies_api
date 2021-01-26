@@ -2,8 +2,13 @@
 require_once './config/database.php';
 require_once './admin/scripts/read.php';
 
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $movie = getSingleMovie($id);
+}
 
-  $getMovies = getAllMovies();
+
+ 
 ?>
 
 
@@ -28,7 +33,7 @@ require_once './admin/scripts/read.php';
     </ul>
     </header>
 
- <?php foreach ($getMovies as $movie):?>
+ <?php if (!empty($movie)):?>
     <div class="movie-item">
     <img src="images/<?php echo $movie['movies_cover']; ?>" alt="<?php echo $movie['movies_title']; ?> cover Image">
 
@@ -38,7 +43,10 @@ require_once './admin/scripts/read.php';
     <p><?php echo $movie['movies_storyline']; ?></p>
     <a href="#">More details...</a>
     </div>
-    <?php endforeach;?>
+
+    <?php else:?>
+    <p>There isnt such a movie</p>
+    <?php endif;?>
 
     
 <footer>

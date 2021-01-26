@@ -18,11 +18,12 @@ function getSingleMovie($id)
 {
     $pdo = Database::getInstance()->getConnection();
     ## TODO: finish the line with a proper SQL query that only fetch movie for the given id
-    $querySingle = '';
+    $querySingle = 'SELECT * FROM `tbl_movies` WHERE movies_id = "'.$id.'"';
     $runSingle = $pdo->query($querySingle);
-    $movie = $runSingle->fetch(PDO::FETCH_ASSOC);
+   
 
-    if ($movie) {
+    if ($runSingle) {
+        $movie = $runSingle->fetch(PDO::FETCH_ASSOC);
         return $movie;
     } else {
         return 'There was a problem to fetch single movie for'.$id;
