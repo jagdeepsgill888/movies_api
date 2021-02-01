@@ -1,9 +1,6 @@
 <?php
-# Turn display error on , debug only
-// ini_set('display_errors', 1);
 
-require_once './config/database.php';
-require_once './admin/scripts/read.php';
+require_once 'load.php';
 
   if (isset($_GET['filter'])) {
       $filter = $_GET['filter'];
@@ -24,16 +21,7 @@ require_once './admin/scripts/read.php';
     <title>Welcome to the Movies CMS</title>
 </head>
 <body>
-    <header>
-    <h2>This content could be your nav</h2>
-    <ul>
-   <li><a href="index.php?filter=action">Action</a></li>
-   <li><a href="index.php?filter=comedy">Comedy</a></li>
-   <li><a href="index.php?filter=family">Fmaily</a></li>
-   <li><a href="index.php">All</a></li>
-   
-    </ul>
-    </header>
+   <?php include 'templates/header.php';?>
 
  <?php foreach ($getMovies as $movie):?>
     <div class="movie-item">
@@ -48,10 +36,7 @@ require_once './admin/scripts/read.php';
     <?php endforeach;?>
 
     
-<footer>
-<p>Copyright &#xA9; <?php echo date('Y');?>
-</p>
-</footer>
+    <?php include 'templates/footer.php';?>
 
 </body>
 </html>

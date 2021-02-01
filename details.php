@@ -1,6 +1,5 @@
 <?php
-require_once './config/database.php';
-require_once './admin/scripts/read.php';
+require_once 'load.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -22,16 +21,7 @@ if (isset($_GET['id'])) {
     <title></title>
 </head>
 <body>
-    <header>
-    <h2>This content could be your nav</h2>
-    <ul>
-   <li><a href="#">Action</a></li>
-   <li><a href="#">Comedy</a></li>
-   <li><a href="#">Fmaily</a></li>
-   <li><a href="#">All</a></li>
-   
-    </ul>
-    </header>
+<?php include 'templates/header.php';?>
 
  <?php if (!empty($movie)):?>
     <div class="movie-item">
@@ -49,10 +39,7 @@ if (isset($_GET['id'])) {
     <?php endif;?>
 
     
-<footer>
-<p>Copyright &#xA9; <?php echo date('Y');?>
-</p>
-</footer>
+    <?php include 'templates/footer.php';?>
 
 </body>
 </html>
