@@ -29,3 +29,27 @@ function getSingleMovie($id)
         return 'There was a problem to fetch single movie for'.$id;
     }
 }
+
+
+function getMoviesbyGenre($genre)
+{
+    $pdo = Database::getInstance()->getConnection();
+    ## TODO: finish the following SQL query that fetch all movies that belongs to the given genre
+
+    $query = ' SELECT m.*, GROUP_CONCAT(g.genre_name) as genre_name FROM tbl_movies m';
+    $query.= ' LEFT JOIN tbl_mov_genre link ON link.movies_id = m.movies_id';
+    $query.= ' LEFT JOIN tbl_genre g ON link.genre_id = g.genre_id';
+    $query.= ' GROUP BY m.movies_id';
+    $query.= ' HAVING genre_name LIKE "%'.$genre.'%"';
+
+    // echo $query;
+    // exit;
+
+    $runQuery = $pdo->query($query);
+    if ($runQuery) {
+        $movies = $runQuery->fetchAll(PDO::FETCH_ASSOC);
+        return $movies;
+    } else {
+        return 'There was a problem to fetch movie by genre '.$genre;
+    }
+}
