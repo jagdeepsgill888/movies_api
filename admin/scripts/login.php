@@ -20,6 +20,7 @@ function login($username, $password, $ip)
         //Write the username and userid into session
         $_SESSION['user_id'] = $found_user_id;
         $_SESSION['user_name'] = $found_user['user_fname'];
+        $_SESSION['user_date'] = $date;
 
        
         //Update the user IP by the current logged in
@@ -30,6 +31,15 @@ function login($username, $password, $ip)
                 ':user_ip'=>$ip,
                 ':user_id'=>$found_user_id
             )
+        );
+        //update the user date in the db
+        $update_user_query = 'UPDATE tbl_user SET user_date= :user_date WHERE user_id=:user_id';
+        $update_user_set= $pdo->prepare($update_user_query);
+        $update_user_set->execute(
+            array(
+                ':user_date'=>$date,
+                ':user_id'=>$found_user_id
+                )
         );
 
 

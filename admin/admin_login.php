@@ -1,6 +1,7 @@
 <?php
 require_once '../load.php';
 $ip = $_SERVER['REMOTE_ADDR'];
+$date = date('Y-m-d H:i:s');
 
 if (isset($_SESSION['user_id'])) {
     redirect_to("index.php");
@@ -10,7 +11,7 @@ if (isset($_POST['submit'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
     if (!empty($username) && !empty($password)) {
-        $result = login($username, $password, $ip);
+        $result = login($username, $password, $ip, $date);
         $message = $result;
     } else {
         $message = 'Please fill out the required fields.';
