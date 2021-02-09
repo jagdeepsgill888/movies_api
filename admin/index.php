@@ -9,6 +9,6 @@
      <title>Welcome to the admin panel</title>
  </head>
  <body>
-     <h2>Welcome to the dashboard page! </h2>
+     <h2>Welcome to the dashboard page, <?php echo $_SESSION['user_name']; ?>!</h2>
  </body>
  </html>

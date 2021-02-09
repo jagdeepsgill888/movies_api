@@ -16,6 +16,11 @@ function login($username, $password, $ip)
     if ($found_user = $user_set->fetch(PDO::FETCH_ASSOC)) {
         //we found user in the DB, get him in!
         $found_user_id = $found_user['user_id'];
+
+        //Write the username and userid into session
+        $_SESSION['user_id'] = $found_user_id;
+        $_SESSION['user_name'] = $found_user['user_fname'];
+
        
         //Update the user IP by the current logged in
         $update_user_query = 'UPDATE tbl_user SET user_ip = :user_ip WHERE user_id = :user_id';

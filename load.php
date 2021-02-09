@@ -9,6 +9,7 @@ define('ADMIN_SCRIPT_PATH', ADMIN_PATH.'/scripts');
 // require_once './config/database.php';
 // require_once './admin/scripts/read.php';
 
+session_start();
 
 require_once ABSPATH.'/config/database.php';
 require_once ADMIN_SCRIPT_PATH.'/functions.php';
