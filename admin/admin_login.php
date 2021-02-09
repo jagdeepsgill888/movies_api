@@ -1,17 +1,21 @@
 <?php
- require_once '../load.php';
- $ip = $_SERVER['REMOTE_ADDR'];
+require_once '../load.php';
+$ip = $_SERVER['REMOTE_ADDR'];
 
- if (isset($_POST['username'])) {
-     $username = trim($_POST['username']);
-     $password = trim($_POST['password']);
-     if (!empty($username) && !empty($password)) {
-         $result = login($username, $password, $ip);
-         $message = $result;
-     } else {
-         $message = 'Please fill out the required fields.';
-     }
- }
+if (isset($_SESSION['user_id'])) {
+    redirect_to("index.php");
+}
+
+if (isset($_POST['submit'])) {
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+    if (!empty($username) && !empty($password)) {
+        $result = login($username, $password, $ip);
+        $message = $result;
+    } else {
+        $message = 'Please fill out the required fields.';
+    }
+}
 ?>
 
 <!DOCTYPE html>

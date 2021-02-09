@@ -40,3 +40,17 @@ function login($username, $password, $ip)
         return 'Please try again&*.';
     }
 }
+
+function confirm_logged_in()
+{
+    if (!isset($_SESSION['user_id'])) {
+        redirect_to("admin_login.php");
+    }
+}
+
+function logout()
+{
+    session_destroy();
+
+    redirect_to("admin_login.php");
+}
