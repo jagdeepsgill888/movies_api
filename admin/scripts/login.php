@@ -20,7 +20,9 @@ function login($username, $password, $ip)
         //Write the username and userid into session
         $_SESSION['user_id'] = $found_user_id;
         $_SESSION['user_name'] = $found_user['user_fname'];
-        $_SESSION['user_date'] = $date;
+        $_SESSION['user_lastdate'] = $found_user['user_date'];
+        
+        // $_SESSION['user_date'] = $date;
 
        
         //Update the user IP by the current logged in
