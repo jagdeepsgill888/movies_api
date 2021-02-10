@@ -1,0 +1,42 @@
+
+
+
+
+
+1. 
+login 3 tries lock
+https://stackoverflow.com/questions/30770438/blocked-the-user-after-3-attempts-in-php
+
+I used bits of the way discussed here to create a way to stop user from logining in.
+If the  failed login attempts exceeds remain logins available, it will stop the user.
+by ending the proccess.
+
+I added a simple subtraction for counting the reamining logins available and displayed it for users to see only many
+tries they have left.
+
+
+2. 
+Pan's week4 videos
+
+I used a similar way for finding , storing and updating ($update_user_query) our ip, date, last login date etc and for counting the user's Succesful login.
+
+Wrote each of them into the session eg $_SESSION['user_lastdate'] for getting the past date.
+
+It (the login count) is then stored in the column "user_login_succ". When a user logins in and it will update the number.
+I added a simple addition to help me count 1 succesful with current number stored in the db. 
+It added 1 each time a user logs in.
+
+$loginsucc for Succesful login count,  $date for dates ,  $messagelogin for remaiming logins etc
+
+
+
+3.
+Others
+https://www.homeandlearn.co.uk/php/php2p7.html
+https://stackoverflow.com/questions/8336858/how-to-combine-two-strings-together-in-php
+
+I only used to them to recall the addition, subtraction and operator etc in php.
+They are general guide to do simple math/arguments.
+
+
+Username:admin  password:admin123

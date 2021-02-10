@@ -17,15 +17,17 @@ function login($username, $password, $ip, $loginsucc)
         //we found user in the DB, get him in!
         $found_user_id = $found_user['user_id'];
 
-        //Write the username and userid into session
+        //Write the username , userid user_lastedate into session
         $_SESSION['user_id'] = $found_user_id;
         $_SESSION['user_name'] = $found_user['user_fname'];
         $_SESSION['user_lastdate'] = $found_user['user_date'];
-        //login lock testing
+        
+        // 1 value when a user logs in
         $_SESSION['loginCount'] = 1;
 
         
-        //login tracking
+        //login tracking and write the number into session
+        // add the current login with 1 login count
         
         $_SESSION['user_login_count'] = $found_user['user_login_succ'] + $_SESSION['loginCount'];
         $loginsucc = $_SESSION['user_login_count'];
@@ -51,7 +53,7 @@ function login($username, $password, $ip, $loginsucc)
                 )
         );
 
-        //login ssuccessful tracking
+        //login ssuccessful tracking update user data in the db
         $update_user_query = 'UPDATE tbl_user SET user_login_succ = :user_login_succ WHERE user_id=:user_id';
         $update_user_set= $pdo->prepare($update_user_query);
         $update_user_set->execute(
@@ -65,7 +67,8 @@ function login($username, $password, $ip, $loginsucc)
         //Redirect user back to index.php
         redirect_to('index.php');
     } else {
-        //this is where user are given 3 tries to login
+        //this is where users are given 3 tries to login
+        //if failed, prompt the user and stop them from logging in
         
         $_SESSION['loginCount']++;
         // echo 'Please try again.';
@@ -74,7 +77,7 @@ function login($username, $password, $ip, $loginsucc)
         $attemps = 4 - $_SESSION['loginCount'];
         $messagelogin = $againText . ' ' . $attemps;
         echo $messagelogin;
-        
+        // if exceeds , its it will stop user from logging in
         if ($_SESSION['loginCount'] > 3) {
             echo '.  Too many failed attempts !!';
             exit;
