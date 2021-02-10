@@ -24,16 +24,14 @@ function login($username, $password, $ip, $loginsucc)
         //login lock testing
         $_SESSION['loginCount'] = 1;
 
+        
         //login tracking
+        
         $_SESSION['user_login_count'] = $found_user['user_login_succ'] + $_SESSION['loginCount'];
-      
+        $loginsucc = $_SESSION['user_login_count'];
+        
         
 
-
-        
-        // $_SESSION['user_date'] = $date;
-
-       
         //Update the user IP by the current logged in
         $update_user_query = 'UPDATE tbl_user SET user_ip = :user_ip WHERE user_id = :user_id';
         $update_user_set = $pdo->prepare($update_user_query);
@@ -67,10 +65,8 @@ function login($username, $password, $ip, $loginsucc)
         //Redirect user back to index.php
         redirect_to('index.php');
     } else {
-        //this is invalid attempt, reject it!
-        // return 'Please try again&*.';
-        // 'Please try again.';
-
+        //this is where user are given 3 tries to login
+        
         $_SESSION['loginCount']++;
         // echo 'Please try again.';
         $againText = "Please try again.";
@@ -78,7 +74,7 @@ function login($username, $password, $ip, $loginsucc)
         $attemps = 4 - $_SESSION['loginCount'];
         $messagelogin = $againText . ' ' . $attemps;
         echo $messagelogin;
-        // echo 'Please try again.' . 4 - $_SESSION['loginCount'];
+        
         if ($_SESSION['loginCount'] > 3) {
             echo '.  Too many failed attempts !!';
             exit;
