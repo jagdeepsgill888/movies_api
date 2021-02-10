@@ -1,5 +1,5 @@
 <?php
-function login($username, $password, $ip)
+function login($username, $password, $ip, $loginsucc)
 {
     $pdo = Database::getInstance()->getConnection();
 
@@ -23,6 +23,13 @@ function login($username, $password, $ip)
         $_SESSION['user_lastdate'] = $found_user['user_date'];
         //login lock testing
         $_SESSION['loginCount'] = 1;
+
+        //login tracking
+        $_SESSION['user_login_count'] = $found_user['user_login_succ'] + $_SESSION['loginCount'];
+      
+        
+
+
         
         // $_SESSION['user_date'] = $date;
 
@@ -46,8 +53,15 @@ function login($username, $password, $ip)
                 )
         );
 
-        //login lock testing
-        // $_SESSION['loginCount'] = 1;
+        //login ssuccessful tracking
+        $update_user_query = 'UPDATE tbl_user SET user_login_succ = :user_login_succ WHERE user_id=:user_id';
+        $update_user_set= $pdo->prepare($update_user_query);
+        $update_user_set->execute(
+            array(
+                ':user_login_succ'=>$loginsucc,
+                ':user_id'=>$found_user_id
+                )
+        );
 
 
         //Redirect user back to index.php
