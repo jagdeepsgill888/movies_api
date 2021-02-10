@@ -21,6 +21,8 @@ function login($username, $password, $ip)
         $_SESSION['user_id'] = $found_user_id;
         $_SESSION['user_name'] = $found_user['user_fname'];
         $_SESSION['user_lastdate'] = $found_user['user_date'];
+        //login lock testing
+        $_SESSION['loginCount'] = 1;
         
         // $_SESSION['user_date'] = $date;
 
@@ -44,12 +46,29 @@ function login($username, $password, $ip)
                 )
         );
 
+        //login lock testing
+        // $_SESSION['loginCount'] = 1;
+
 
         //Redirect user back to index.php
         redirect_to('index.php');
     } else {
         //this is invalid attempt, reject it!
-        return 'Please try again&*.';
+        // return 'Please try again&*.';
+        // 'Please try again.';
+
+        $_SESSION['loginCount']++;
+        // echo 'Please try again.';
+        $againText = "Please try again.";
+        $againText .= " Remaining attemps";
+        $attemps = 4 - $_SESSION['loginCount'];
+        $messagelogin = $againText . ' ' . $attemps;
+        echo $messagelogin;
+        // echo 'Please try again.' . 4 - $_SESSION['loginCount'];
+        if ($_SESSION['loginCount'] > 3) {
+            echo '.  Too many failed attempts !!';
+            exit;
+        }
     }
 }
 
