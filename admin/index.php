@@ -16,6 +16,7 @@
      <h2>Last login was <?php echo $_SESSION['user_lastdate']; ?>!</h2>
      <h2>Number of Succesful logins  <?php echo $_SESSION['user_login_count']; ?>!</h2>
      
+     <a href="admin_createuser.php">Create User</a>
      <a href="admin_logout.php">Sign Out</a>
  </body>
  </html>
