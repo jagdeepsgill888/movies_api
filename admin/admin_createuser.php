@@ -12,6 +12,14 @@
 
      $message = createUser($data);
  }
+
+ function getRandomPassword($length=8, $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789!#$")
+ {
+     return substr(str_shuffle($chars), 0, $length);
+ }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +40,7 @@
     <input id="username" type="text" name="username" value=""><br><br>
 
     <label for="password">Password</label>
-    <input id="password" type="text" name="password" value=""><br><br>
+    <input id="password" type="text" name="password" value="<?php echo getRandomPassword(); ?>"><br><br>
 
     <label for="email">Email</label>
     <input id="email" type="email" name="email" value=""><br><br>
