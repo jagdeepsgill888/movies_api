@@ -11,7 +11,24 @@
      );
 
      $message = createUser($data);
+     $to = $_POST['email'];
+     $subject = "New Account Confirmation";
+     $textEmil ="Your account has been created";
+     $emailUsername = "Your Username is :" . ' ' . $_POST['username'];
+
+
+     $headers = "MIME-Version: 1.0" . "\r\n";
+     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+     // More headers
+     $headers .= 'From: <webmaster@example.com>' . "\r\n";
+
+     //  mail($to, $subject, $textEmil, $headers, $emailUsername);
+     //  echo "Email has been sent";
+     $testmail = mail("dav@test.com", "Hello World", "THis is a test");
+     var_dump($testmail);
  }
+
 
  function getRandomPassword($length=8, $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789!#$")
  {
