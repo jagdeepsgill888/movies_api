@@ -14,6 +14,7 @@
          'username'=>trim($_POST['username']),
          'password'=>$encryptPass,
          'email'=>trim($_POST['email']),
+         'user_level'=>trim($_POST['user_level']),
      );
      
      $messageA = createUser($data);
@@ -56,6 +57,12 @@
 
     <label for="email">Email</label>
     <input id="email" type="email" name="email" value=""><br><br>
+
+    <label for="user_level">User Level</label>
+    <select id="user_level" name="user_level">
+    <option value="0">Web Editor</option>
+    <option value="1">Web Admin</option>
+    </select><br><br>
 
     <button type="submit" name="submit">Create User</button>
 

@@ -22,6 +22,7 @@ function login($username, $password, $ip, $loginsucc)
         $_SESSION['user_name'] = $found_user['user_fname'];
         $_SESSION['user_lastdate'] = $found_user['user_date'];
         
+        
         // 1 value when a user logs in
         $_SESSION['loginCount'] = 1;
 
