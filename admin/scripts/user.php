@@ -1,5 +1,11 @@
 <?php
 
+function function_alert($msg)
+{
+    echo "<script type='text/javascript'>alert('$msg');</script>";
+}
+
+
 function createUser($user_data)
 {
     ## Testing only, remove it later
@@ -22,12 +28,28 @@ function createUser($user_data)
         )
     );
 
-    ## 2. Redirect to index.php if created user successfully, (maybe with some message??)
+    ## RA2: 2. Send email with user login info and send user to index.php
+    ##  used PHP mail() Function and wamp imap smtp
     # otherwise, show the error message
 
     if ($create_user_result) {
-        redirect_to('index.php');
-    } else {
-        return 'The user did not go through!!';
+        $to       = $user_data['email'];
+        $subject  = 'User Confirmation';
+        $message  = 'Hi, your account is ready!' . "\r\n" .
+                   'Username:' . $user_data['username'] . "\r\n" . "</br>" .
+                   'Password:' . $user_data['password'] . "\r\n" . "</br>" .
+                   'Login Url:' . 'http://localhost/Singh_J_3014_r2/admin/admin_login.php';
+        $headers  = 'From: [your_gmail_account_username]@gmail.com' . "\r\n" .
+                 'MIME-Version: 1.0' . "\r\n" .
+                 'Content-type: text/html; charset=utf-8';
+        if (mail($to, $subject, $message, $headers)) {
+            function_alert("Done, PLease check Email");
+            header("Refresh:0; url=index.php");
+        // redirect_to('index.php');
+        // echo "Email sent";
+        } else {
+            echo 'The user did not go through!!';
+            return "Email sending failed";
+        }
     }
 }

@@ -1,31 +1,12 @@
-<html>
-
-   <head>
-      <title>Sending HTML email using PHP</title>
-   </head>
-
-   <body>
-
-      <?php
-         $to = "xyz@somedomain.com";
-         $subject = "This is subject";
-
-         $message = "<b>This is HTML message.</b>";
-         $message .= "<h1>This is headline.</h1>";
-
-         $header = "From:abc@somedomain.com \r\n";
-         $header .= "Cc:afgh@somedomain.com \r\n";
-         $header .= "MIME-Version: 1.0\r\n";
-         $header .= "Content-type: text/html\r\n";
-
-         $retval = mail($to, $subject, $message, $header);
-
-         if ($retval == true) {
-             echo "Message sent successfully...";
-         } else {
-             echo "Message could not be sent...";
-         }
-      ?>
-
-   </body>
-</html>
+<?php
+$to       = 'recipient@yahoo.com';
+$subject  = 'Testing sendmail.exe';
+$message  = 'Hi, you just received an email using sendmail!';
+$headers  = 'From: [your_gmail_account_username]@gmail.com' . "\r\n" .
+            'MIME-Version: 1.0' . "\r\n" .
+            'Content-type: text/html; charset=utf-8';
+if (mail($to, $subject, $message, $headers)) {
+    echo "Email sent";
+} else {
+    echo "Email sending failed";
+}

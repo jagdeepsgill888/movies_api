@@ -1,8 +1,8 @@
-version: "3"
+version: "3.7"
 
 services:
   php:
-    build: .docker/php
+    build: ./.docker/php/
     depends_on:
       - mysql
     ports:
@@ -11,6 +11,12 @@ services:
       - ./:/var/www/html/
     environment:
       IDP_ENVIRONMENT: docker
+
+  email:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
 
   mysql:
     image: mariadb:10.3
