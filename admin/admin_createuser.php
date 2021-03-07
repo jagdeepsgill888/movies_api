@@ -1,6 +1,6 @@
 <?php
  require_once '../load.php';
- confirm_logged_in();
+ confirm_logged_in(true);
 
 
  if (isset($_POST['submit'])) {

@@ -10,6 +10,7 @@ function getUserLevelMap()
     return array(
         '0'=>'Web Editor',
         '1'=>'Web Admin',
+        '2'=>'Web Super Admin',
     );
 }
 

@@ -86,10 +86,14 @@ function login($username, $password, $ip, $loginsucc)
     }
 }
 
-function confirm_logged_in()
+function confirm_logged_in($admin_above_only=false)
 {
     if (!isset($_SESSION['user_id'])) {
         redirect_to("admin_login.php");
+    }
+
+    if (!empty($admin_above_only) && empty($_SESSION['user_level'])) {
+        redirect_to('index.php');
     }
 }
 
