@@ -5,6 +5,24 @@ function function_alert($msg)
     echo "<script type='text/javascript'>alert('$msg');</script>";
 }
 
+function getUserLevelMap()
+{
+    return array(
+        '0'=>'Web Editor',
+        '1'=>'Web Admin',
+    );
+}
+
+function getCurrentUserLevel()
+{
+    $user_level_map = getUserLevelMap();
+
+    if (isset($_SESSION['user_level']) && array_key_exists($_SESSION['user_level'], $user_level_map)) {
+        return $user_level_map[$_SESSION['user_level']];
+    } else {
+        return "Unrecognized";
+    }
+}
 
 function createUser($user_data)
 {

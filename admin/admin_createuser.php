@@ -60,8 +60,10 @@
 
     <label for="user_level">User Level</label>
     <select id="user_level" name="user_level">
-    <option value="0">Web Editor</option>
-    <option value="1">Web Admin</option>
+    <?php $user_level_map = getUserLevelMap();
+      foreach ($user_level_map as $val => $label):?>
+         <option value="<?php echo $val;?>"><?php echo $label;?></option>
+    <?php endforeach;?>
     </select><br><br>
 
     <button type="submit" name="submit">Create User</button>
