@@ -7,12 +7,13 @@
      $psww = $_POST['password'];
      //  $encoded = base64_encode($psww);
      //RA2: 4. encrypted password in db with  password_hash
-     $encryptPass= password_hash($psww, PASSWORD_DEFAULT);
+     //  $encryptPass= password_hash($psww, PASSWORD_DEFAULT);
      
      $data = array(
          'fname'=>trim($_POST['fname']),
          'username'=>trim($_POST['username']),
-         'password'=>$encryptPass,
+         'password'=>trim($_POST['password']),
+        //  'password'=>$encryptPass,
          'email'=>trim($_POST['email']),
          'user_level'=>trim($_POST['user_level']),
      );
