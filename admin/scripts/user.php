@@ -30,6 +30,10 @@ function createUser($user_data)
     ## Testing only, remove it later
     // return var_export($user_data, true);
 
+    if (empty($user_data['username'])||isUsernameExists($user_data['username'])) {
+        return 'Username is invalid!';
+    }
+
     ## 1.Run the proper SQL query to start to insert user
     $pdo = Database::getInstance()->getConnection();
 
@@ -95,6 +99,9 @@ function getSingleUser($user_id)
 
 function editUser($user_data)
 {
+    if (empty($user_data['username'])||isUsernameExists($user_data['username'])) {
+        return 'Username is invalid!';
+    }
     $pdo = Database::getInstance()->getConnection();
     
     ## Finish the SQL query in here
@@ -115,8 +122,31 @@ function editUser($user_data)
     // exit;
 
     if ($update_user_result) {
+        $_SESSION['user_name'] = $user_data['fname'];
+        $_SESSION['user_level'] = $user_data['user_level'];
         redirect_to('index.php');
     } else {
         return 'Guess you got canned...';
     }
+}
+
+function isCurrentUserAdminAbove()
+{
+    return !empty($_SESSION['user_level']);
+}
+
+
+function isUsernameExists($username)
+{
+    $pdo = Database::getInstance()->getConnection();
+    ## check if there is another row in the tbl_user that has the given username
+    $user_exists_query = 'SELECT COUNT(*) FROM tbl_user WHERE user_name = :username';
+    $user_exists_set = $pdo->prepare($user_exists_query);
+    $user_exists_result = $user_exists_set->execute(
+        array(
+            ':username'=>$username
+        )
+    );
+
+    return !$user_exists_result || $user_exists_set->fetchColumn()>0;
 }

@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
         'username'=>trim($_POST['username']),
         'password'=>trim($_POST['password']),
         'email'=>trim($_POST['email']),
-        'user_level'=>trim($_POST['user_level']),
+        'user_level'=>isCurrentUserAdminAbove()?trim($_POST['user_level']):'0',
         'id' => $id,
     );
 
@@ -49,6 +49,7 @@ if (isset($_POST['submit'])) {
             <label for="email">Email</label>
             <input id="email" type="email" name="email" value="<?php echo $user_info['user_email']; ?>"><br><br>
 
+         <?php if (isCurrentUserAdminAbove()):?>
             <label for="user_level">User Level</label>
             <select id="user_level" name="user_level">
             <?php $user_level_map = getUserLevelMap();
@@ -56,6 +57,7 @@ if (isset($_POST['submit'])) {
                 <option value="<?php echo $val;?>" <?php echo $val===(int)$user_info['user_level']?'selected':'';?> ><?php echo $label;?></option>
             <?php endforeach;?>
             </select><br><br>
+         <?php endif;?>   
 
             <button type="submit" name="submit">Update User</button>
         <?php endwhile;?>

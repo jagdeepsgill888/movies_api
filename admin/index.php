@@ -16,7 +16,7 @@
      <h2>Last login was <?php echo $_SESSION['user_lastdate']; ?>!</h2>
      <h2>Number of Succesful logins  <?php echo $_SESSION['user_login_count']; ?>!</h2>
      <h3>Your are in level: <?php echo getCurrentUserLevel(); ?></h3>
-     <?php if (!empty($_SESSION['user_level'])):?>
+     <?php if (isCurrentUserAdminAbove()):?>
         <a href="admin_createuser.php">Create User</a>
      <?php endif;?>
   
