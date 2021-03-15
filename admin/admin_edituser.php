@@ -8,6 +8,20 @@
  if (empty($current_user)) {
      $messageA = 'Failed to get user info';
  }
+
+if (isset($_POST['submit'])) {
+    $data = array(
+        'fname'=>trim($_POST['fname']),
+        'username'=>trim($_POST['username']),
+        'password'=>trim($_POST['password']),
+        'email'=>trim($_POST['email']),
+        'user_level'=>trim($_POST['user_level']),
+        'id' => $id,
+    );
+
+    $messageA = editUser($data);
+}
+
  ?>
 
 <!DOCTYPE html>

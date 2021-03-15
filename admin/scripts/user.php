@@ -92,3 +92,31 @@ function getSingleUser($user_id)
         return false;
     }
 }
+
+function editUser($user_data)
+{
+    $pdo = Database::getInstance()->getConnection();
+    
+    ## Finish the SQL query in here
+    $update_user_query = 'UPDATE tbl_user SET user_fname = :fname, user_name=:username, user_pass=:password, user_email=:email, user_level=:user_level WHERE user_id = :id';
+    $update_user_set = $pdo->prepare($update_user_query);
+    $update_user_result = $update_user_set->execute(
+        array(
+            ':fname'=>$user_data['fname'],
+            ':username'=>$user_data['username'],
+            ':password'=>$user_data['password'],
+            ':email'=>$user_data['email'],
+            ':user_level'=>$user_data['user_level'],
+            ':id'=>$user_data['id'],
+        )
+    );
+
+    // $update_user_set->debugDumpParams();
+    // exit;
+
+    if ($update_user_result) {
+        redirect_to('index.php');
+    } else {
+        return 'Guess you got canned...';
+    }
+}
