@@ -4,7 +4,6 @@
 
 
  if (isset($_POST['submit'])) {
-     $psww = $_POST['password'];
      //  $encoded = base64_encode($psww);
      //RA2: 4. encrypted password in db with  password_hash
      //  $encryptPass= password_hash($psww, PASSWORD_DEFAULT);
@@ -28,10 +27,10 @@
 
  //RA2: 3. Function for generating a passoword when registering
      // by using str_shuffle
- function generatePassword($length=8, $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789!#$")
- {
-     return substr(str_shuffle($chars), 0, $length);
- }
+//  function generatePassword($length=8, $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVXYZ0123456789!#$")
+//  {
+//      return substr(str_shuffle($chars), 0, $length);
+//  }
 
 
 ?>
@@ -54,7 +53,7 @@
     <input id="username" type="text" name="username" value=""><br><br>
 
     <label for="password">Password</label>
-    <input id="password" type="text" name="password" value="<?php echo generatePassword(); ?>"><br><br>
+    <input id="password" type="text" name="password" value=""><br><br>
 
     <label for="email">Email</label>
     <input id="email" type="email" name="email" value=""><br><br>
