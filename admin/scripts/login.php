@@ -65,8 +65,13 @@ function login($username, $password, $ip, $loginsucc)
         );
 
 
-        //Redirect user back to index.php
-        redirect_to('index.php');
+        //R3 Redirect New user to edit their infor then after they login more than once direct user back to index.php
+        if ($_SESSION['user_login_count'] > 1) {
+            redirect_to('index.php');
+        }
+        if ($_SESSION['user_login_count'] = 1) {
+            redirect_to('admin_edituser.php');
+        }
     } else {
         //this is where users are given 3 tries to login
         //if failed, prompt the user and stop them from logging in
